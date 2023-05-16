@@ -63,26 +63,8 @@ const container = document.getElementById("container")
 
 // seleziono elementi da array principale (posts)
 posts.forEach(element => {
-    const {id, content, media, likes, created} = element
-    // console.log("(ID)",id, "(CONTENUTO)",content, "(MEDIA)",media, "(LIKE)",likes, "(DATA)",created)
-
-    // definisco nuovo array (authorArray)
-    let authorArray = [];
-
-    // tiro fuori array author da array principale e lo pusho nel nuovo array
-    posts.forEach(element => {
-        const author = element.author
-        // console.log(author);
-        authorArray.push(author)
-        return authorArray
-    });
-
-    //seleziono elementi da nuovo array (authorArray)
-    authorArray.forEach(element => {
-        let {name, image} = element
-        console.log("(NOME)",name, "(IMMAGINE)",image)
-        return name, image;
-    });
+    const {id, content, media, author, likes, created} = element
+    console.log("(ID)",id, "(CONTENUTO)",content, "(MEDIA)",media, "(LIKE)",likes, author, "(DATA)",created)
 
 
     // inserisco nell'html i dati 
@@ -91,17 +73,16 @@ posts.forEach(element => {
             <div class="post__header">
                 <div class="post-meta">                    
                     <div class="post-meta__icon">
-                        <img class="profile-pic" src=${media} alt=>                    
-                    </div>
+                        <img class="profile-pic" src=${author.image} alt=></div>
                     <div class="post-meta__data">
-                        <div class="post-meta__author"></div>
+                        <div class="post-meta__author">${author.name}</div>
                         <div class="post-meta__time">${created}</div>
                     </div>                    
                 </div>
             </div>
             <div class="post__text">${content}</div>
             <div class="post__image">
-                <img src="" alt="">
+                <img src="${media}" alt="">
             </div>
             <div class="post__footer">
                 <div class="likes js-likes">
