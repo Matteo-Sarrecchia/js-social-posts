@@ -60,11 +60,10 @@ const posts = [
 const container = document.getElementById("container")
 
 
-
 // seleziono elementi da array principale (posts)
 posts.forEach(element => {
-    const {id, content, media, author, likes, created} = element
-    console.log("(ID)",id, "(CONTENUTO)",content, "(MEDIA)",media, "(LIKE)",likes, author, "(DATA)",created)
+    let {id, content, media, author, likes, created} = element
+    // console.log("(ID)",id, "(CONTENUTO)",content, "(MEDIA)",media, "(LIKE)",likes, author, "(DATA)",created)
 
 
     // inserisco nell'html i dati 
@@ -73,16 +72,16 @@ posts.forEach(element => {
             <div class="post__header">
                 <div class="post-meta">                    
                     <div class="post-meta__icon">
-                        <img class="profile-pic" src=${author.image} alt=></div>
+                        <img class="profile-pic" src=${element.author.image} alt=></div>
                     <div class="post-meta__data">
-                        <div class="post-meta__author">${author.name}</div>
-                        <div class="post-meta__time">${created}</div>
+                        <div class="post-meta__author">${element.author.name}</div>
+                        <div class="post-meta__time">${element.created}</div>
                     </div>                    
                 </div>
             </div>
-            <div class="post__text">${content}</div>
+            <div class="post__text">${element.content}</div>
             <div class="post__image">
-                <img src="${media}" alt="">
+                <img src="${element.media}" alt="">
             </div>
             <div class="post__footer">
                 <div class="likes js-likes">
@@ -93,11 +92,35 @@ posts.forEach(element => {
                         </a>
                     </div>
                     <div class="likes__counter">
-                        Piace a <b id="like-counter-1" class="js-likes-counter">${likes}</b> persone
+                        Piace a <b id="like-counter-1" class="js-likes-counter">${element.likes}</b> persone
                     </div>
                 </div> 
             </div>            
         </div>`
 });
 
+const elCounter = document.querySelectorAll(".js-likes-counter")
+console.log(elCounter);
+
+const elLikeButtons = document.querySelectorAll(".like-button")
+console.log(elLikeButtons);
+
+elLikeButtons.forEach((element, i) => {
+    element.addEventListener("click",
+        function (event) {
+            event.preventDefault()
+            element.classList.add("like-button--liked");
+            let positionCounters = elCounter[i];
+            let valorePositionCounters = parseInt(positionCounters.innerHTML)
+            valorePositionCounters++
+            positionCounters.innerHTML = valorePositionCounters
+            console.log(valorePositionCounters);
+
+            if (element.classList.contains("like-button--liked")){
+                element.classList.remove("like-button--liked")
+            } else {
+                element.classList.add("like-button--liked")}
+        }
+    )
+});
 
