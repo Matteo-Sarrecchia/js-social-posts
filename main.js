@@ -109,17 +109,20 @@ elLikeButtons.forEach((element, i) => {
     element.addEventListener("click",
         function (event) {
             event.preventDefault()
-            element.classList.add("like-button--liked");
+            // element.classList.add("like-button--liked");
             let positionCounters = elCounter[i];
             let valorePositionCounters = parseInt(positionCounters.innerHTML)
-            valorePositionCounters++
-            positionCounters.innerHTML = valorePositionCounters
+            // valorePositionCounters++
+            // positionCounters.innerHTML = valorePositionCounters
             console.log(valorePositionCounters);
-
             if (element.classList.contains("like-button--liked")){
                 element.classList.remove("like-button--liked")
+                valorePositionCounters--
             } else {
-                element.classList.add("like-button--liked")}
+                element.classList.add("like-button--liked")
+                valorePositionCounters++
+            }
+            positionCounters.innerHTML = valorePositionCounters
         }
     )
 });
